@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Manager Page</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/manager-page.css') }}">
+
+  <!-- bootstrap links -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/43124feaf5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <section id="title">
+
+    <div class="container">
+
+    <!-- Nav Bar -->
+    <div class="navbarr">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <img class="skylogo" src="{{ url_for('static', filename='images/logo.png') }}" alt="comcast logo">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="#title">Home</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#Family">Family</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#Tasks">Tasks</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('homepage')}}">Signout</a>
+        </li>
+      </ul>
+      </div>
+
+  </nav>
+  </div>
+
+
+  
+    <!-- Title -->
+
+    <div class="row">
+      <div class="col-lg-6">
+        <h1 class="intro">Hello!</h1>
+        <p class="intro">Welcome to SKY!</p>
+        
+        
+      </div>
+    
+    </div>
+
+  </section>
+
+  </div>
+
+
+  <!-- Features -->
+
+  <section id="Family">
+     <div class="Fam">
+        <h1 class="familyheading">FAMILY</h1>
+        <img src="{{ url_for('static', filename='images/organisation.png') }}">
+    </div>
+</section>
+
+
+  <!-- Tasks -->
+
+  <section id="Tasks">
+    <div class="Tasks">
+     <center><h1><b>TASKS</b></h1></center>
+        <div class="Tasks-container">
+       <select id="subdivision-list">
+        <option disabled selected value>Select Squad</option>
+        <option value="subdivision-1">Broadband</option>
+        <option value="subdivision-3">NBA</option>
+        <option value="subdivision-2">ERICA</option>
+        <option value="subdivision-4">DF</option>
+      </select>
+      
+      <select id="subdivision-details-list">
+        <option disabled selected value>Select Members</option>
+        <option value="subdivision-1-detail-1">Bernard</option>
+        <option value="subdivision-1-detail-2">Priya</option>
+        <option value="subdivision-1-detail-3">Nagarajan</option>
+        <option value="subdivision-1-detail-4">Sangeetha</option>
+        <option value="subdivision-1-detail-5">Uma</option>
+        <option value="subdivision-1-detail-6">Flavia</option>
+        <option value="subdivision-1-detail-7">Ajeesh</option>
+        <option value="subdivision-2-detail-1">Abishek</option>
+        <option value="subdivision-2-detail-2">Ashwin</option>
+        <option value="subdivision-2-detail-3">Anusha</option>
+        <option value="subdivision-2-detail-4">Sheriff</option>
+        <option value="subdivision-2-detail-5">Kalidas</option>
+        <option value="subdivision-2-detail-6">Vignesh</option>
+        <option value="subdivision-2-detail-7">Shruthi</option>
+        <option value="subdivision-3-detail-1">Anitha</option>
+        <option value="subdivision-3-detail-2">Sarat</option>
+        <option value="subdivision-4-detail-1">Ram</option>
+        <option value="subdivision-4-detail-2">Pradeep</option>
+      </select>
+
+      
+
+<script>
+    const subdivisionList = document.getElementById('subdivision-list');
+const subdivisionDetailsList = document.getElementById('subdivision-details-list');
+
+subdivisionList.addEventListener('change', () => {
+  const selectedSubdivision = subdivisionList.value;
+  // Clear the options in the second select element
+  subdivisionDetailsList.innerHTML = '<option value="">Select Members</option>';
+
+  if (selectedSubdivision === 'subdivision-1') {
+    subdivisionDetailsList.innerHTML += `
+        <option value="subdivision-1-detail-1">Bernard</option>
+        <option value="subdivision-1-detail-2">Priya</option>
+        <option value="subdivision-1-detail-3">Nagarajan</option>
+        <option value="subdivision-1-detail-4">Sangeetha</option>
+        <option value="subdivision-1-detail-5">Uma</option>
+        <option value="subdivision-1-detail-6">Flavia</option>
+        <option value="subdivision-1-detail-7">Ajeesh</option>
+    `;
+  } else if (selectedSubdivision === 'subdivision-2') {
+    subdivisionDetailsList.innerHTML += `
+        <option value="subdivision-2-detail-1">Abishek</option>
+        <option value="subdivision-2-detail-2">Ashwin</option>
+        <option value="subdivision-2-detail-3">Anusha</option>
+        <option value="subdivision-2-detail-4">Sheriff</option>
+        <option value="subdivision-2-detail-5">Kalidas</option>
+        <option value="subdivision-2-detail-6">Vignesh</option>
+        <option value="subdivision-2-detail-7">Shruthi</option>
+    `;
+  } else if (selectedSubdivision === 'subdivision-3') {
+    subdivisionDetailsList.innerHTML += `
+        <option value="subdivision-3-detail-1">Anitha</option>
+        <option value="subdivision-3-detail-2">Sarat</option>
+    `;
+  } else if (selectedSubdivision === 'subdivision-4') {
+    subdivisionDetailsList.innerHTML += `
+        <option value="subdivision-4-detail-1">Ram</option>
+        <option value="subdivision-4-detail-2">Pradeep</option>
+    `;
+  }
+});
+</script>
+         
+      </div>
+    </div>
+  </section>
+
+      
+  
+ <!-- Contact -->
+ <!-- <section id="Contact">
+  <div class="Contact">
+    <div class="social-media">
+
+      <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+    
+    </div>
+  </div>
+
+</section> -->
+    
+
+</body>
+
+</html>

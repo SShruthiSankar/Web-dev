@@ -1,0 +1,109 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url('/static/images/background_com.png');
+    background-size: cover;
+    background-position: absolute;
+    font-family: sans-serif;
+}
+
+.border{
+    width: 320px;
+    height: 490px;
+    background: black;
+    color: white;
+    top: 50%;
+    left: 25%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.btn {
+    padding: 10px 40px;
+    background-color: #9e0909;
+    color: #FFFFFF;
+    font-style: oblique;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.textbox{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+     
+::placeholder {
+    color: #FFFFFF;
+    opacity: 1;
+    font-style: oblique;
+    font-weight: bold;
+}
+
+.header{
+    color: rgb(255,255,255);
+    font-style: oblique;
+    font-family: Times;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.word{
+    color: rgb(255,255,255);
+    font-style: oblique;
+    /* font-family: serif; */
+    font-weight: bold;
+    font-size: 20px;
+}
+/* #username {
+    font-family: Lucida;
+}
+#password {
+    font-family: Lucida;
+} */
+.bottom{
+    color: rgb(255,255,255);
+    font-style: oblique;
+    font-family: Lucida;
+    font-weight: bold;
+    
+}
+
+.loginbox input[type="text"], input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.word p{
+    margin: 0;
+    padding: 0;
+}
+.msg{
+    color: rgb(255, 0, 0);
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline
+}
+
+.avatar{
+    background: url(Avatar.png);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(75% - 50px);
+}

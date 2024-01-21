@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/task-page.css') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.20.0/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+
+
+
+   
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    
+</head>
+
+<body>
+    <div class="row">
+        <div class="column-1 col-lg-4 col-md-4">
+            <center><h3>Title</h3></center>            
+            
+          <div class="coloumn1">
+            <!-- <input id="task-title" type="text" placeholder="Add New Task"> -->
+            <button class="task-btn btn btn-outline-secondary col-12"id="addtask" onclick="addtask()"><b>Add Task  </b><i class="fa fa-solid fa-plus"></i></button>
+            <ul id="sortlist">
+             
+              </ul>
+              <script src="{{ url_for('static', filename='js/task-page.js') }}"></script>
+              <script>
+                
+                slist(document.getElementById("sortlist"));
+                </script>
+
+
+
+
+
+            </div>
+        </div>
+        
+        <div id="e1" class="column-2 col-lg-4 col-md-4">
+            <b><center><h3>Tasks</h3></center></b>
+            <center><div id="target"></div></center>
+              </div>
+
+        
+
+        <div class="column-3 col-lg-4 col-md-4">
+            <center><h3>Drag & Drop</h3></center>
+            <div class="button-group d-grid gap-1 col-6 mx-auto">
+            <button id="I1"  class="image btn btn-secondary " draggable="true" disabled="True"><i class="fa fa-image"></i>  Image</button>
+
+         <button id="F1" class="file btn btn-secondary " draggable="true" disabled="True"><i class="fa fa-file"></i>    File</button>
+            <button  id="T1" class="text-box btn btn-secondary" draggable="true" disabled="true"  ><i class="fa fa-text-width"></i>   text-box</button>
+          <button class="Publish btn btn-secondary" disabled="true" id="P1"><i class="fa fa-upload"></i>  Publish</button></br></br>
+          <a href="{{ url_for('manager') }}"><button class="btn"><i class="fas fa-home custom-icon"></i></button></a>
+        </div>
+
+        
+
+        
+   
+<script> 
+var divCount=0
+
+T1.addEventListener("dragend", function(event) 
+{
+
+  divCount=divCount+1  /// DIV CONTAINER
+  createDiv()
+
+  function createDiv(){
+  
+  var boldButton1;
+  var uniqID = 'div_'+divCount;
+  d = document.createElement('div');
+  d.setAttribute("id",uniqID)
+  d.className="draggable1"; 
+  d.setAttribute("draggable", true)
+
+  text_id = 'text_'+divCount
+  
+  var textBox = document.createElement("textarea");
+  textBox.setAttribute("draggable",'false');
+  textBox.setAttribute("id", "text_id");
+  textBox.classList.add("form-control")
+  textBox.rows =5
+  console.log(text_id)
+
+  
+  textBox.addEventListener('input',()=>{
+  f= textBox.value
+  console.log(f)
+  
+  });
+ 
+  
+  
+  e= document.createElement('button');
+  e.classList.add("btn", "btn-danger-sm");
+  var icon = document.createElement("i");
+  icon.classList.add("fas","fa-trash");  
+  e.appendChild(icon)
+  e.setAttribute("id","deletetext");
+  e.addEventListener("click", deleteContents);
+
+// Create line break elements
+  
+  var br1 = document.createElement("br");
+  var br2 = document.createElement("br");
+  var br3 = document.createElement("br");
+
+
+// Create button elements for bold, italic, and underline
+  bold_id ='bold_'+divCount
+  var boldButton = document.createElement("button");
+  boldButton.setAttribute("id", "bold_id");
+  boldButton.addEventListener("click", makeBold);
+  boldButton.classList.add("btn", "btn-light","btn-sm");
+  boldButton.innerHTML = '<i class="fas fa-bold"></i> ' + boldButton.innerHTML;
+
+  
+  italic_id ='italic_'+divCount
+  var italicButton = document.createElement("button");
+  //italicButton.innerHTML = "Italic";
+  italicButton.addEventListener("click", makeItalic);
+  italicButton.setAttribute("id", "italic_id");
+  italicButton.classList.add("btn", "btn-light","btn-sm");
+  italicButton.innerHTML = '<i class="fas fa-italic"></i> ' + italicButton.innerHTML;
+
+
+  under_id ='under_'+divCount
+  var underlineButton = document.createElement("button");
+  //underlineButton.innerHTML = "Underline";
+  underlineButton.addEventListener("click", makeUnderline);
+  underlineButton.setAttribute("id", "under_id");
+  underlineButton.classList.add("btn", "btn-light","btn-sm");
+  underlineButton.innerHTML = '<i class="fas fa-underline"></i>' + underlineButton.innerHTML;
+
+
+// Create button elements for uppercase and lowercase
+  
+var upper_id = 'upper_' + divCount;
+var uppercaseButton = document.createElement("button");
+uppercaseButton.innerHTML = '<b>  A <b>';
+uppercaseButton.setAttribute("id", upper_id);
+uppercaseButton.addEventListener("click", makeUppercase);
+uppercaseButton.classList.add("btn", "btn-light");
+
+// Append the button to your container element
+
+  var lower_id = 'lower_' + divCount;
+  var lowercaseButton = document.createElement("button");
+  lowercaseButton.innerHTML = "Lowercase";
+  lowercaseButton.setAttribute("id", lower_id);
+  lowercaseButton.classList.add("btn", "btn-light");
+  lowercaseButton.innerHTML = '<b>  a <b>';
+  lowercaseButton.addEventListener("click", makeLowercase);
+
+
+// Create select element for font size
+  var fontSizeSelect = document.createElement("select");
+  fontSizeSelect.addEventListener("change", changeFontSize);
+  fontSizeSelect.classList.add('form-control-sm')
+
+var fontSizeOptions = ["11","12", "14", "16", "18", "20", "22", "24", "28", "30", "32", "36","40"];
+for (var i = 0; i < fontSizeOptions.length; i++) {
+  var option = document.createElement("option");
+  option.setAttribute("value", fontSizeOptions[i]);
+  option.innerHTML = fontSizeOptions[i];
+  fontSizeSelect.appendChild(option);
+}
+
+// Create select element for font style
+  
+  var fontStyleSelect = document.createElement("select");
+  fontStyleSelect_id = 'style_'+divCount
+  fontStyleSelect.addEventListener("change", changeFontStyle);
+  fontStyleSelect.setAttribute("id", fontStyleSelect_id );
+  fontStyleSelect.classList.add('form-control-sm')
+
+
+  var fontStyleOptions = ["Arial", "Times New Roman", "Verdana", "Courier"];
+  for (var i = 0; i < fontStyleOptions.length; i++) {
+    var option = document.createElement("option");
+    option.setAttribute("value", fontStyleOptions[i]);
+    option.innerHTML = fontStyleOptions[i];
+    fontStyleSelect.appendChild(option);
+  }
+
+
+
+// Create select element for text alignment
+var textAlignmentSelect = document.createElement("select");
+textAlignmentSelect.addEventListener("change", changeTextAlignment);
+textAlignmentSelect.classList.add('form-control-sm')
+
+var textAlignmentOptions = ["Left", "Center", "Right"];
+
+  for (var i = 0; i < textAlignmentOptions.length; i++) 
+
+  {
+    var option = document.createElement("option");
+    option.setAttribute("value", textAlignmentOptions[i].toLowerCase());
+    option.innerHTML = textAlignmentOptions[i];
+    textAlignmentSelect.appendChild(option);
+  }
+
+  var check1 =document.createElement('button')
+  check1.classList.add("btn",'btn-success')
+  check1.innerText ='Save'
+
+  check1.addEventListener('click',()=>
+  {
+    textBox.style.backgroundColor ='#FFFFE0'    
+  textBox.disabled=true
+  let textBox_Content = textBox.value
+  console.log(textBox_Content)
+  postData_Content(textBox_Content)
+  });
+
+  // Append the elements into the dv
+
+  
+ 
+  d.appendChild(boldButton);
+  d.appendChild(italicButton);
+  d.appendChild(underlineButton);
+  d.appendChild(fontSizeSelect);
+  d.appendChild(fontStyleSelect);
+  d.appendChild(textAlignmentSelect);
+  d.appendChild(uppercaseButton);
+  d.appendChild(lowercaseButton);
+  d.appendChild(e);
+  d.appendChild(br1);
+  d.appendChild(br2);
+  d.appendChild(textBox)
+  d.appendChild(br1)
+  d.appendChild(check1)
+  
+
+  e = document.createElement('hr');
+  // Function to make the text bold
+  d.appendChild(e)
+  c = document.getElementById('target')
+  c.appendChild(d);
+ 
+
+//c.appendChild(e);
+
+function getSelectedText() {
+        var text = '';
+        if (window.getSelection) {
+            text = window.getSelection().toString();
+        } else if (document.selection && document.selection.type !== 'Control') {
+            text = document.selection.createRange().text;
+        }
+        return text;
+    }
+
+
+function makeBold() {
+  var selectedText = getSelectedText();
+        if (selectedText) {
+            var contentDiv = document.getElementById('text_'+divCount)
+            //console.log(contentDiv.innerText)
+            console.log(selectedText,"Selected text")
+            var html = contentDiv.innerHTML;
+            var boldText = '<b>' + selectedText + '</b>';
+            var newHtml = html.replace(selectedText, boldText);
+            contentDiv.innerHTML = newHtml;
+        }
+  
+}
+
+  // Function to make the text italic
+  function makeItalic() {
+    if (textBox.style.fontStyle === "italic") 
+  {
+    textBox.style.fontStyle = "normal";
+  } else {
+    textBox.style.fontStyle = "italic";
+  }
+  }
+  // Function to make the text underlined
+  function makeUnderline() {
+    if(textBox.style.textDecoration === "underline")
+    {
+      textBox.style.textDecoration ="none";
+    }
+    else{
+      textBox.style.textDecoration ="underline";
+    }
+  }
+// Function to change the font size
+  function changeFontSize() 
+  {
+    
+    var selectedSize = fontSizeSelect.value;
+    
+    textBox.style.fontSize = selectedSize + "px";
+  }
+  
+// Function to change the font style
+  function changeFontStyle() 
+  {
+    var selectedStyle = fontStyleSelect.value;
+    textBox.style.fontFamily = selectedStyle;
+  }
+  
+  // Function to change the text alignment
+  function changeTextAlignment() {
+    //var textBox = document.getElementById("myTextarea");
+    var selectedAlignment = document.querySelectorAll('select')[2].value;
+    textBox.style.textAlign = selectedAlignment;
+  }
+  // function to make uppercase
+  function makeUppercase() 
+  {
+    //var textBox = document.getElementById("myTextarea");
+   console.log(textBox.value);
+    textBox.value= textBox.value.toUpperCase();
+   }
+  // function to make lowercase
+  function makeLowercase()
+  {
+    //var textBox = document.getElementById("myTextarea");
+   
+    console.log(textBox.value);
+    textBox.value = textBox.value.toLowerCase();
+  
+  }
+  function deleteContents() 
+  {
+    console.log(uniqID)
+    document.getElementById(uniqID).innerHTML = "";
+  }
+  
+ 
+  }
+
+  swap();
+
+ })
+
+  
+    
+</script>
+
+<script>  
+var divC = 0;
+
+I1.addEventListener("dragend", function (event) {
+
+var form_1 = document.createElement('form')
+form_1.id = 'formId'+divC
+form_1.action ='/task'
+form_1.method = 'POST'
+form_1.enctype = "multipart/form-data"
+
+divC = divC + 1;
+var x = document.createElement("INPUT");
+x.classList.add("btn", "btn-secondary");
+x.type = "file";
+x.name ='file'
+x.accept = "image/*";
+c = "image_input" + divC;
+x.id = c;
+console.log(x.id);
+var y = document.createElement("div");
+f = "display_image" + divC;
+y.id = f;
+
+const deleteButton = document.createElement('button');
+deleteButton.innerText = 'Delete';
+deleteButton.classList.add("btn", "btn-danger", "ml-1");
+target1 = document.createElement('div');
+target1.id = 'target1_' + divC;
+deleteButton.id = target1.id;
+target1.className = "draggable1";
+target1.setAttribute("draggable", true);
+form_1.appendChild(x)
+form_1.appendChild(y)
+// target1.appendChild(x);
+// target1.appendChild(y);
+target1.appendChild(form_1)
+
+
+
+var check2 =document.createElement('button')
+check2.classList.add("btn",'btn-success')
+check2.innerText ='Save'
+target1.appendChild(deleteButton);
+target1.appendChild(check2)
+let b = document.createElement('hr');
+target1.appendChild(b);
+
+
+check2.addEventListener("click", function () {
+    // Create FormData object to send the form data
+    var formData = new FormData(form_1);
+    
+
+    //formData.append('file',form_1)
+
+    // Send the form data to the Flask route using AJAX
+    fetch('/task', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Handle the response if needed
+        console.log('HII');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+
+d = document.getElementById('target');
+d.appendChild(target1);
+
+const img_input = document.getElementById(c);
+var uploaded_img = "";
+
+img_input.addEventListener("change", function (event) {
+    console.log("hiiii");
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+        var dis = event.target.id;
+        console.log(dis);
+        y.id = dis;
+        console.log(y);
+        uploaded_img = reader.result;
+
+        console.log("Image URL:", uploaded_img);
+
+        // Create an img element
+        const imgElement = document.createElement('img');
+        imgElement.src = uploaded_img;
+        imgElement.style.width = '375px';
+        imgElement.style.height = '211px';
+        imgElement.style.border = '2px solid black';
+
+        // Clear any previous content in the div
+        y.innerHTML = '';
+
+        // Append the img element to the div
+        y.appendChild(imgElement);
+    });
+    reader.readAsDataURL(this.files[0]);
+});
+  
+
+    deleteButton.addEventListener("click", function () {
+        // Remove the entire target1 div when the "Delete" button is clicked
+        d.removeChild(target1);
+    });
+
+    // Add an event listener to the URL to open the image in a new tab when clicked
+    y.addEventListener("click", function () {
+        
+    // Create a new HTML document with the image
+    var newTab = window.open();
+    newTab.document.write(uploaded_img);
+});
+    })
+function deleteTodo(event) {
+  var idtodel = event.target.id;
+  target1.id = idtodel;
+  console.log(target1.id);
+  document.getElementById(idtodel).innerHTML = "";
+}
+deleteButton.onclick = deleteTodo;
+
+swap();
+
+</script>  
+
+
+<script>
+var divC = 0;
+
+ F1.addEventListener("dragend", function (event) {
+
+   var form_2 = document.createElement('form')
+ form_2.id = 'formId_1'+divC
+ form_2.action ='/task'
+ form_2.method = 'POST'
+ form_2.enctype = "multipart/form-data"
+
+
+   var check3 =document.createElement('button')
+   check3.classList.add("btn",'btn-success')
+   check3.innerText ='Save'
+
+   divC = divC + 1;
+   var x = document.createElement("INPUT");
+   x.classList.add("btn", "btn-secondary");
+   x.type = "file";
+   x.name = "file_1"
+   x.accept = "*/*";
+   x.id = "file_input" +divC
+  
+  form_2.appendChild(x)
+
+  deleteButton = document.createElement('button');
+  deleteButton.innerText = 'Delete';
+  deleteButton.classList.add("btn", "btn-danger");
+  target2 = document.createElement('div');
+  target2.className = "draggable1";
+  target2.setAttribute("draggable", true);
+  target2.id = 'target2_' + divC;
+  deleteButton.id = target2.id;
+  target2.appendChild(form_2);
+  target2.appendChild(deleteButton);
+  target2.appendChild(check3)
+  let b = document.createElement('hr');
+  target2.appendChild(b);
+  d = document.getElementById('target');
+  d.appendChild(target2);
+
+  function deleteTodo(event) {
+    var idtodel = event.target.id;
+    target2.id = idtodel;
+    console.log(target2.id);
+    document.getElementById(idtodel).innerHTML = "";
+  }
+  deleteButton.onclick = deleteTodo;
+
+  check3.addEventListener("click", function () {
+    var formData = new FormData(form_2);
+
+    // Assuming 'file_1' is the name of the file input in form_2
+    var fileInput = form_2.querySelector('input[type="file"][name="file_1"]');
+
+    // Check if a file is selected
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+        // Append the file input to formData
+        formData.append('file_1', fileInput.files[0]);
+    } else {
+        console.error('No file selected');
+        return; // Stop further processing if no file is selected
+    }
+
+    // Send the form data to the Flask route using AJAX
+    fetch('/task', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Handle the response if needed
+        console.log('HII');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+  
+
+
+  swap();
+});
+
+
+
+</script>
+
+<script></script>
+
+
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+</html>
+
+
+
+

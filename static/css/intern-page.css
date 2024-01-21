@@ -1,0 +1,104 @@
+
+body{
+   font-family:"sans-serif" ;
+}
+
+#title{
+    background-color: #5a4f7d;
+    color: white;
+}
+
+.container{
+    padding: 2%;
+}
+
+.intro{
+    font-family:"sans-serif";
+    font-weight: 600;
+    font-size:  3rem;
+    line-height: 1.5;
+}
+
+/* Navigation bar */
+
+.navbarr{
+    padding-bottom: 4.5rem;
+
+}
+
+
+/* home buttons */
+
+.home-button{
+    margin: 9% 3% 5% 21%;
+
+}
+
+/* profile picture */
+.propic{
+    padding-bottom: 50px;
+    height: 450px;
+    width: 450x;
+}
+
+
+/* Family */
+
+.Fam{
+    text-align: center;
+    background-color: #9788c9;
+    margin-top: -19px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+.Fam img{
+    width: 1000px;
+    height: 500px;
+    object-fit: fill;
+    margin-bottom: 25px;;
+}
+
+
+/* Courses */
+
+.Courses{
+    text-align: center;
+    background-color: #a597d8;
+    color:white;
+}
+
+.Cou{
+    width: 300px;
+    height:450px;
+    display: inline-block;
+    margin: 5px;
+    text-align: left;
+    object-fit: contain;
+    font-family: sans-serif;
+    color:aliceblue;
+}
+
+.courses_image{
+    width: 300px;
+    height:400px;
+}
+
+/* Tasks */
+
+.Tasks{
+    background-color: rgb(255, 255, 255);
+    font-family:sans-serif;
+    font-weight: bold;
+}
+
+.Tasks-container{
+    background-color:#b2a5db;
+    height: 150px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color:white;
+    
+ }
+ 

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizational Chart Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background color */
+        }
+
+        #uploadedImage {
+            max-width: 100%;
+            max-height: 200px; /* Set a maximum height for the image */
+            margin-top: 20px;
+            display: none; /* Initially hide the image */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Manager Chart</h2>
+
+    <form name = "file" class="form-group" id ='form'  action="/form" method="POST" enctype="multipart/form-data">
+
+        <div>
+            <label for="organizationalChart">Manager Chart</label>
+            <input type="file" class="form-control-file" id="organizationalChart" name="image" accept="image/*" onchange="previewImage()">
+        </div>
+
+        <!-- Display uploaded image -->
+        <img id="uploadedImage" src="#" alt="Uploaded Image">
+
+        <!-- B) Input for Number of Squads -->
+        <div class="form-group">
+            <label for="numOfSquads">Number of Squads:</label>
+            <input type="number" class="form-control" id="numOfSquads" name="numOfSquads" min="1">
+        </div>
+
+        <!-- C) Name of Each Squad -->
+        <div class="form-group bg-light p-2" id="squadNamesContainer">
+            <!-- This div will be dynamically populated with input fields based on the number of squads -->
+        </div>
+
+        <!-- D) Number of Employees for Each Squad -->
+        <div class="form-group bg-light p-2" id="numOfEmployeesContainer">
+            <!-- This div will be dynamically populated with input fields based on the number of squads -->
+        </div>
+
+        <!-- E) Name of Employees for Each Squad -->
+        <div class="form-group bg-light p-2" id="employeeNamesContainer">
+            <!-- This div will be dynamically populated with input fields based on the number of squads and employees -->
+        </div>
+
+        <!-- F) Employee ID for Each Employee -->
+        <div class="form-group bg-light p-2" id="employeeIdsContainer">
+            <!-- This div will be dynamically populated with input fields based on the number of squads and employees -->
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button type="button" class="btn btn-primary mt-3" onclick="collectFormData()">Save to JSON</button>
+
+    </form>
+</div>
+<!-- Bootstrap JS and jQuery (required for some Bootstrap features) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function previewImage() {
+        const input = document.getElementById('organizationalChart');
+        const image = document.getElementById('uploadedImage');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                image.src = e.target.result;
+                image.style.display = 'block'; // Display the image after loading
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Function to dynamically add input fields based on the number of squads
+    // Function to dynamically add input fields based on the number of squads
+    function addInputFields(container, inputName, placeholderPrefix, count, isEmployee = false) {
+    container.innerHTML = ''; // Clear previous fields
+
+    for (let i = 1; i <= count; i++) {
+        const squadGroup = document.createElement('div');
+        squadGroup.className = 'form-group bg-light p-2 mb-4';
+
+        // Create input field for Squad name or Employee name
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.className = 'form-control mb-2';
+        nameInput.name = `${inputName}[${i}][]`;
+        nameInput.placeholder = `${placeholderPrefix} ${i}`;
+        squadGroup.appendChild(nameInput);
+
+        // Create input field for Squad ID or Employee ID only if it's not an employee input
+        if (!isEmployee) {
+            const idInput = document.createElement('input');
+            idInput.type = 'text';
+            idInput.className = 'form-control mb-2';
+            idInput.name = `squadId[${i}][]`; // Add a new array for Squad ID
+            idInput.placeholder = `Squad ID ${i}`;
+            squadGroup.appendChild(idInput);
+            idInput.style.backgroundColor = '#d4edda'; // Light green background for squad IDs
+        }
+
+        // Apply different background color for employee names
+        nameInput.style.backgroundColor = isEmployee ? '#cce5ff' : '#d4edda'; // Light blue background for employee names
+
+        container.appendChild(squadGroup);
+
+        if (isEmployee) {
+            // Create input field for Employee ID
+            const employeeIdInput = document.createElement('input');
+            employeeIdInput.type = 'text';
+            employeeIdInput.className = 'form-control mb-2';
+            employeeIdInput.name = `employeeId[${i}][]`;
+            employeeIdInput.placeholder = `Employee ID ${i}`;
+            squadGroup.appendChild(employeeIdInput);
+            employeeIdInput.style.backgroundColor = '#ffd3d3'; // Light red background for employee IDs
+        }
+    }
+}
+
+    // Event listener for the change in the number of squads input
+    // Event listener for the change in the number of squads input
+document.getElementById('numOfSquads').addEventListener('change', function () {
+    const numOfSquads = parseInt(this.value);
+
+    // Call the function to add input fields for squad names
+    addInputFields(document.getElementById('squadNamesContainer'), 'squadName', 'Squad', numOfSquads);
+
+    // Create input fields for the number of employees under each squad
+    const numOfEmployeesContainer = document.getElementById('numOfEmployeesContainer');
+    numOfEmployeesContainer.innerHTML = ''; // Clear previous fields
+
+    for (let i = 1; i <= numOfSquads; i++) {
+        const squadGroup = document.createElement('div');
+        squadGroup.className = 'form-group bg-light p-2 mb-4';
+
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.className = 'form-control';
+        input.name = `numOfEmployees[${i}]`;
+        input.placeholder = `Number of Employees for Squad ${i}`;
+        squadGroup.appendChild(input);
+
+        // Create containers for employee names and IDs under each squad
+        const employeeNamesContainer = document.createElement('div');
+        employeeNamesContainer.id = `employeeNamesContainer${i}`;
+        squadGroup.appendChild(employeeNamesContainer);
+
+        const employeeIdsContainer = document.createElement('div');
+        employeeIdsContainer.id = `employeeIdsContainer${i}`;
+        squadGroup.appendChild(employeeIdsContainer);
+
+        // Attach event listener for the change in the number of employees input under each squad
+        input.addEventListener('change', function () {
+            const numOfEmployees = parseInt(this.value);
+
+            // Remove existing employee input fields before adding new ones
+            employeeNamesContainer.innerHTML = '';
+            employeeIdsContainer.innerHTML = '';
+
+            // Call the function to add input fields for employee names and IDs under each squad
+            addInputFields(employeeNamesContainer, 'employeeName', 'Employee', numOfEmployees, true);
+            // Removed the following line to avoid creating Squad ID fields under employees
+            // addInputFields(employeeIdsContainer, 'employeeId', 'Employee ID', numOfEmployees, true);
+        });
+
+        numOfEmployeesContainer.appendChild(squadGroup);
+    }
+});
+
+
+    function collectFormData() {
+    const fileInput = document.getElementById('organizationalChart');
+    let formData = new FormData(document.getElementById('form'));
+    formData = {
+        image: fileInput ? fileInput.value : '',
+        numOfSquads: document.getElementById('numOfSquads') ? document.getElementById('numOfSquads').value : '',
+        squads: [],
+    };
+
+    for (let i = 1; i <= formData.numOfSquads; i++) {
+        const squad = {
+            id: document.querySelector(`input[name="squadId[${i}][]"]`) ? document.querySelector(`input[name="squadId[${i}][]"]`).value : '',
+            name: document.querySelector(`input[name="squadName[${i}][]"]`) ? document.querySelector(`input[name="squadName[${i}][]"]`).value : '',
+            numOfEmployees: document.querySelector(`input[name="numOfEmployees[${i}]"]`) ? document.querySelector(`input[name="numOfEmployees[${i}]"]`).value : '',
+            employees: [],
+        };
+
+        for (let j = 1; j <= squad.numOfEmployees; j++) {
+            const employee = {
+                name: document.querySelector(`input[name="employeeName[${i}][]"][placeholder="Employee ${j}"]`) ? document.querySelector(`input[name="employeeName[${i}][]"][placeholder="Employee ${j}"]`).value : '',
+                id: document.querySelector(`input[name="employeeId[${i}][]"][placeholder="Employee ID ${j}"]`) ? document.querySelector(`input[name="employeeId[${i}][]"][placeholder="Employee ID ${j}"]`).value : '',
+            };
+            squad.employees.push(employee);
+        }
+
+        formData.squads.push(squad);
+    }
+
+    // Add file information to formData
+    if (fileInput && fileInput.files && fileInput.files[0]) {
+        formData.fileInfo = {
+            name: fileInput.files[0].name,
+            type: fileInput.files[0].type,
+            size: fileInput.files[0].size,
+            lastModified: fileInput.files[0].lastModified,
+        };
+    }
+
+    // Convert the data to JSON string
+    const jsonData = JSON.stringify(formData, null, 2);
+    console.log(jsonData); // You can replace this with sending the JSON data to a server or storing it as needed
+    // var formData_1 = new FormData(formData);
+    // formData_1.append('image', fileInput ? fileInput.files[0] : '');
+    formData.append('image', fileInput ? fileInput.files[0] : '')
+
+    fetch('/form', {
+        method: 'POST',
+        
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log('Data sent to server successfully', 'hi');
+    })
+    .catch(error => {
+        console.error('Error sending data to server:', error);
+    });
+}
+
+
+
+</script>
+
+</body>
+</html>

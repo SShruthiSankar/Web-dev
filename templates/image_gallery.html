@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <!-- Add your styles and links to external CSS or libraries here -->
+    <style>
+        /* Add your custom styles here */
+        body {
+            background-color: #f8f9fa; /* Light gray background color */
+        }
+
+        .image-card {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .image-card img {
+            max-width: 100%;
+            max-height: 200px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Gallery</h1>
+        <!-- Iterate through the images and create image cards -->
+        {% for image in images %}
+            <div class="image-card">
+                <h3>Image ID: {{ image.id }}</h3>
+                <img src="{{ url_for('static', filename=image.file_path) }}" alt="Image">
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Add your scripts and links to external JavaScript or libraries here -->
+</body>
+</html>

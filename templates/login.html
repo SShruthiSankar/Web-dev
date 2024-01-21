@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Login </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">          
+    </head>
+    <body></br></br></br></br></br>
+        <div align="center">
+          <div align="center" class="border">
+             <div class="header">
+                <h1>Login</h1>
+             </div>
+            <h2 class="word">
+              <img src="{{ url_for('static', filename='images/Avatar.png') }}" class="avatar">
+                <form action="{{ url_for('login') }}" method="post">
+                  <div class="msg">{{ msg }}</div><br>
+                    <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
+                    <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br>
+                    <input type="submit" class="btn" value="Sign In"></br>
+                </form>
+            </h2>
+          <a class="bottom" href="{{url_for('forgot')}}">Forgot Password</a>
+            <p class="bottom">Don't have an account?<a class="bottom" href="{{url_for('register')}}"> Sign Up here</a></p>
+            
+          </div>
+        </div>
+    </body>
+</html>

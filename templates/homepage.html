@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Comcast Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+</head>
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" height=70 width=110 class="logo">
+            <ul>
+                <li><a href="{{ url_for('login') }}"> Login </a></li>
+                <li><a href="{{ url_for('register') }}"  target=”_blank”> Sign Up </a></li>
+            </ul>
+        <div class="content">
+            <h1> EMPLOYEE ONBOARDING PAGE </h1><br><br>
+            <p> Welcome to COMCAST Family! <br>Explore our onboarding website by logging in or signing
+                up if you are new here!
+            </p><br> <br>
+        <div>
+            <button type="button"> <span><a href="https://jobs.comcast.com/" style="color:white; text-decoration:none" target=”_blank”></span>Comcast</a></button>
+            <button type="button"><span></span> About </button>
+        </div>
+        </div>
+        </div>
+
+    </div>
+</body>
+</html>
